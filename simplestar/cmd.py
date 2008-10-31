@@ -20,6 +20,9 @@ def cmd(*args):
     
     result = AgiResult()
     for v in response[4:].split(' '):
-        setattr(result, *v.split('=', 1))
+        try:
+            setattr(result, *(i.strip() for i in v.split('=', 1)))
+        except TypeError:
+            pass
     
     return result
